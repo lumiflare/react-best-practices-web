@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "52 reglas para optimizar el rendimiento de aplicaciones React",
+    "description": "Una guía completa de patrones de optimización de rendimiento y mejores prácticas de React"
+  },
+  "nav": {
+    "home": "Inicio",
+    "toggleSidebar": "Alternar barra lateral",
+    "toggleTheme": "Cambiar tema",
+    "selectLanguage": "Seleccionar idioma",
+    "viewSource": "Ver código fuente"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "code": {
+    "incorrect": "Incorrecto",
+    "correct": "Correcto",
+    "copy": "Copiar código",
+    "copied": "¡Copiado!"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Los waterfalls son el principal asesino del rendimiento. Cada await secuencial añade latencia de red completa. Eliminarlos produce las mayores ganancias."
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "Reducir el tamaño inicial del bundle mejora el Time to Interactive y el Largest Contentful Paint."
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "Optimizar el renderizado del lado del servidor y la obtención de datos elimina los waterfalls del servidor y reduce los tiempos de respuesta."
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "La deduplicación automática y los patrones eficientes de obtención de datos reducen las solicitudes de red redundantes."
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "Reducir los re-renders innecesarios minimiza el cálculo desperdiciado y mejora la capacidad de respuesta de la UI."
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "Optimizar el proceso de renderizado reduce el trabajo que el navegador necesita hacer."
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "Las micro-optimizaciones para rutas críticas pueden sumar mejoras significativas."
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "Patrones avanzados para casos específicos que requieren una implementación cuidadosa."
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "Cuando las operaciones async no tienen interdependencias, ejecútalas concurrentemente usando Promise.all()."
+    },
+    "async-dependencies": {
+      "description": "Para operaciones con dependencias parciales, usa better-all para maximizar el paralelismo."
+    },
+    "async-api-routes": {
+      "description": "En API routes y Server Actions, inicia las operaciones independientes inmediatamente, aunque no las esperes aún."
+    },
+    "async-suspense-boundaries": {
+      "description": "Usa Suspense boundaries para mostrar la UI contenedora más rápido mientras los datos se cargan."
+    },
+    "async-defer-await": {
+      "description": "Mueve las operaciones await a las ramas donde realmente se usan para evitar bloquear rutas de código que no las necesitan."
+    },
+    "bundle-barrel-imports": {
+      "description": "Importa directamente desde los archivos fuente en lugar de barrel files para evitar cargar miles de módulos no utilizados."
+    },
+    "bundle-dynamic-imports": {
+      "description": "Usa next/dynamic para cargar perezosamente componentes grandes que no se necesitan en el renderizado inicial."
+    },
+    "bundle-conditional": {
+      "description": "Carga datos o módulos grandes solo cuando una característica está activada."
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics, logging y error tracking no bloquean la interacción del usuario. Cárgalos después de la hidratación."
+    },
+    "bundle-preload": {
+      "description": "Precarga bundles pesados antes de que se necesiten para reducir la latencia percibida."
+    },
+    "server-auth-actions": {
+      "description": "Los Server Actions se exponen como endpoints públicos. Siempre verifica la autenticación y autorización dentro de cada Server Action."
+    },
+    "server-parallel-fetching": {
+      "description": "Los React Server Components se ejecutan secuencialmente dentro de un árbol. Reestructura con composición para paralelizar la obtención de datos."
+    },
+    "server-serialization": {
+      "description": "El límite React Server/Client serializa todas las propiedades del objeto. Solo pasa los campos que el cliente realmente usa."
+    },
+    "server-cache-lru": {
+      "description": "React.cache() solo funciona dentro de una solicitud. Para datos compartidos entre solicitudes secuenciales, usa un cache LRU."
+    },
+    "server-cache-react": {
+      "description": "Usa React.cache() para la deduplicación de solicitudes del lado del servidor. La autenticación y las consultas de base de datos se benefician más."
+    },
+    "server-after-nonblocking": {
+      "description": "Usa after() de Next.js para programar trabajo que debe ejecutarse después de enviar una respuesta."
+    },
+    "server-dedup-props": {
+      "description": "La serialización RSC→client deduplica por referencia de objeto, no por valor. Haz las transformaciones en el cliente, no en el servidor."
+    },
+    "client-swr-dedup": {
+      "description": "SWR permite la deduplicación de solicitudes, caching y revalidación entre instancias de componentes."
+    },
+    "client-localstorage-schema": {
+      "description": "Añade prefijo de versión a las claves y almacena solo los campos necesarios. Previene conflictos de esquema y almacenamiento accidental de datos sensibles."
+    },
+    "client-passive-event-listeners": {
+      "description": "Añade { passive: true } a los event listeners de touch y wheel para habilitar el scroll inmediato."
+    },
+    "client-event-listeners": {
+      "description": "Usa useSWRSubscription() para compartir event listeners globales entre instancias de componentes."
+    },
+    "rerender-functional-setstate": {
+      "description": "Cuando actualices el estado basándote en el valor actual del estado, usa la forma de actualización funcional de setState."
+    },
+    "rerender-lazy-state-init": {
+      "description": "Pasa una función a useState para valores iniciales costosos. Sin la forma de función, el inicializador se ejecuta en cada render."
+    },
+    "rerender-memo": {
+      "description": "Extrae el trabajo costoso en componentes memoizados para habilitar retornos tempranos antes del cálculo."
+    },
+    "rerender-memo-with-default-value": {
+      "description": "Extrae los valores de parámetros no primitivos por defecto a constantes para preservar la memoización."
+    },
+    "rerender-derived-state": {
+      "description": "Suscríbete al estado booleano derivado en lugar de valores continuos para reducir la frecuencia de re-render."
+    },
+    "rerender-defer-reads": {
+      "description": "No te suscribas al estado dinámico (searchParams, localStorage) si solo lo lees dentro de callbacks."
+    },
+    "rerender-transitions": {
+      "description": "Marca las actualizaciones de estado frecuentes y no urgentes como transitions para mantener la capacidad de respuesta de la UI."
+    },
+    "rerender-dependencies": {
+      "description": "Especifica dependencias primitivas en lugar de objetos para minimizar las re-ejecuciones de efectos."
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "Cuando una expresión es simple y tiene un tipo de resultado primitivo, no la envuelvas en useMemo."
+    },
+    "rendering-content-visibility": {
+      "description": "Aplica content-visibility: auto para diferir el renderizado fuera de pantalla."
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "Inyecta un script síncrono que actualice el DOM antes de que React hidrate para evitar el parpadeo."
+    },
+    "rendering-activity": {
+      "description": "Usa el componente Activity de React para preservar el estado/DOM de componentes costosos que cambian frecuentemente de visibilidad."
+    },
+    "rendering-hoist-jsx": {
+      "description": "Extrae JSX estático fuera de los componentes para evitar la recreación."
+    },
+    "rendering-conditional-render": {
+      "description": "Usa operadores ternarios explícitos en lugar de && para renderizado condicional cuando la condición puede ser 0 o NaN."
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "Envuelve el SVG en un div y anima el contenedor para aceleración por hardware."
+    },
+    "rendering-svg-precision": {
+      "description": "Reduce la precisión de coordenadas SVG para disminuir el tamaño del archivo."
+    },
+    "js-length-check-first": {
+      "description": "Cuando compares arrays con operaciones costosas, comprueba las longitudes primero."
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort() muta el array in situ. Usa .toSorted() para crear un nuevo array ordenado sin mutación."
+    },
+    "js-batch-dom-css": {
+      "description": "Evita intercalar escrituras de estilo con lecturas de layout para prevenir layouts síncronos forzados."
+    },
+    "js-cache-function-results": {
+      "description": "Usa un Map a nivel de módulo para cachear resultados de funciones cuando la misma función se llama repetidamente."
+    },
+    "js-index-maps": {
+      "description": "Múltiples llamadas a .find() por la misma clave deberían usar un Map para búsquedas O(1)."
+    },
+    "js-set-map-lookups": {
+      "description": "Convierte arrays a Set/Map para comprobaciones de pertenencia repetidas."
+    },
+    "js-combine-iterations": {
+      "description": "Múltiples llamadas a .filter() o .map() iteran el array múltiples veces. Combínalas en un solo bucle."
+    },
+    "js-early-exit": {
+      "description": "Retorna temprano cuando el resultado esté determinado para saltar procesamiento innecesario."
+    },
+    "js-hoist-regexp": {
+      "description": "No crees RegExp dentro del render. Eleva al scope del módulo o memoiza con useMemo()."
+    },
+    "js-cache-property-access": {
+      "description": "Cachea las búsquedas de propiedades de objetos en rutas críticas."
+    },
+    "js-cache-storage": {
+      "description": "localStorage, sessionStorage y document.cookie son síncronos y costosos. Cachea las lecturas en memoria."
+    },
+    "js-min-max-loop": {
+      "description": "Encontrar el elemento más pequeño o más grande solo requiere un solo paso por el array. Ordenar es un desperdicio."
+    },
+    "advanced-event-handler-refs": {
+      "description": "Almacena callbacks en refs cuando se usan en effects que no deberían volver a suscribirse en cambios de callback."
+    },
+    "advanced-use-latest": {
+      "description": "Accede a los últimos valores en callbacks sin añadirlos a los arrays de dependencias usando useEffectEvent."
+    }
+  }
+}

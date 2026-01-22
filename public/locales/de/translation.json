@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "52 Regeln zur Optimierung der Leistung von React-Anwendungen",
+    "description": "Ein umfassender Leitfaden zu React-Leistungsoptimierungsmustern und Best Practices"
+  },
+  "nav": {
+    "home": "Startseite",
+    "toggleSidebar": "Seitenleiste umschalten",
+    "toggleTheme": "Theme wechseln",
+    "selectLanguage": "Sprache auswählen",
+    "viewSource": "Quellcode anzeigen"
+  },
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System"
+  },
+  "code": {
+    "incorrect": "Falsch",
+    "correct": "Richtig",
+    "copy": "Code kopieren",
+    "copied": "Kopiert!"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Waterfalls sind der Leistungskiller Nr. 1. Jedes sequenzielle await fügt volle Netzwerklatenz hinzu. Ihre Beseitigung bringt die größten Gewinne."
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "Die Reduzierung der anfänglichen Bundle-Größe verbessert Time to Interactive und Largest Contentful Paint."
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "Die Optimierung des serverseitigen Renderings und Datenabrufs eliminiert serverseitige Waterfalls und reduziert Antwortzeiten."
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "Automatische Deduplizierung und effiziente Datenabrufmuster reduzieren redundante Netzwerkanfragen."
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "Die Reduzierung unnötiger Re-renders minimiert verschwendete Berechnungen und verbessert die UI-Reaktionsfähigkeit."
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "Die Optimierung des Rendering-Prozesses reduziert die Arbeit, die der Browser erledigen muss."
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "Micro-Optimierungen für Hot Paths können sich zu bedeutenden Verbesserungen summieren."
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "Fortgeschrittene Muster für spezielle Fälle, die sorgfältige Implementierung erfordern."
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "Wenn async-Operationen keine Abhängigkeiten haben, führen Sie sie gleichzeitig mit Promise.all() aus."
+    },
+    "async-dependencies": {
+      "description": "Für Operationen mit partiellen Abhängigkeiten verwenden Sie better-all, um die Parallelität zu maximieren."
+    },
+    "async-api-routes": {
+      "description": "In API-Routes und Server Actions starten Sie unabhängige Operationen sofort, auch wenn Sie sie noch nicht awaiten."
+    },
+    "async-suspense-boundaries": {
+      "description": "Verwenden Sie Suspense-Boundaries, um die Wrapper-UI schneller anzuzeigen, während Daten geladen werden."
+    },
+    "async-defer-await": {
+      "description": "Verschieben Sie await-Operationen in die Zweige, wo sie tatsächlich verwendet werden, um das Blockieren von Code-Pfaden zu vermeiden."
+    },
+    "bundle-barrel-imports": {
+      "description": "Importieren Sie direkt aus Quelldateien statt aus Barrel-Dateien, um das Laden tausender ungenutzter Module zu vermeiden."
+    },
+    "bundle-dynamic-imports": {
+      "description": "Verwenden Sie next/dynamic zum verzögerten Laden großer Komponenten, die beim initialen Rendering nicht benötigt werden."
+    },
+    "bundle-conditional": {
+      "description": "Laden Sie große Daten oder Module nur, wenn eine Funktion aktiviert ist."
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics, Logging und Error-Tracking blockieren keine Benutzerinteraktion. Laden Sie sie nach der Hydration."
+    },
+    "bundle-preload": {
+      "description": "Laden Sie schwere Bundles vor, bevor sie benötigt werden, um die wahrgenommene Latenz zu reduzieren."
+    },
+    "server-auth-actions": {
+      "description": "Server Actions werden als öffentliche Endpoints exponiert. Verifizieren Sie immer Authentifizierung und Autorisierung in jeder Server Action."
+    },
+    "server-parallel-fetching": {
+      "description": "React Server Components werden innerhalb eines Baums sequenziell ausgeführt. Strukturieren Sie mit Komposition um, um das Datenabrufen zu parallelisieren."
+    },
+    "server-serialization": {
+      "description": "Die React Server/Client-Grenze serialisiert alle Objekteigenschaften. Übergeben Sie nur Felder, die der Client tatsächlich verwendet."
+    },
+    "server-cache-lru": {
+      "description": "React.cache() funktioniert nur innerhalb einer Anfrage. Für Daten, die über sequenzielle Anfragen geteilt werden, verwenden Sie einen LRU-Cache."
+    },
+    "server-cache-react": {
+      "description": "Verwenden Sie React.cache() für serverseitige Request-Deduplizierung. Authentifizierung und Datenbankabfragen profitieren am meisten."
+    },
+    "server-after-nonblocking": {
+      "description": "Verwenden Sie Next.js after(), um Arbeit zu planen, die nach dem Senden einer Antwort ausgeführt werden soll."
+    },
+    "server-dedup-props": {
+      "description": "RSC→Client-Serialisierung dedupliziert nach Objektreferenz, nicht nach Wert. Führen Sie Transformationen im Client durch, nicht auf dem Server."
+    },
+    "client-swr-dedup": {
+      "description": "SWR ermöglicht Request-Deduplizierung, Caching und Revalidierung über Komponenteninstanzen hinweg."
+    },
+    "client-localstorage-schema": {
+      "description": "Fügen Sie Versionspräfixe zu Keys hinzu und speichern Sie nur benötigte Felder. Verhindert Schema-Konflikte und versehentliches Speichern sensibler Daten."
+    },
+    "client-passive-event-listeners": {
+      "description": "Fügen Sie { passive: true } zu Touch- und Wheel-Event-Listenern hinzu, um sofortiges Scrollen zu ermöglichen."
+    },
+    "client-event-listeners": {
+      "description": "Verwenden Sie useSWRSubscription(), um globale Event-Listener über Komponenteninstanzen zu teilen."
+    },
+    "rerender-functional-setstate": {
+      "description": "Wenn Sie den State basierend auf dem aktuellen State-Wert aktualisieren, verwenden Sie die funktionale Update-Form von setState."
+    },
+    "rerender-lazy-state-init": {
+      "description": "Übergeben Sie eine Funktion an useState für teure Initialwerte. Ohne Funktionsform läuft der Initializer bei jedem Render."
+    },
+    "rerender-memo": {
+      "description": "Extrahieren Sie teure Arbeit in memoisierte Komponenten, um Early Returns vor der Berechnung zu ermöglichen."
+    },
+    "rerender-memo-with-default-value": {
+      "description": "Extrahieren Sie Standard-Non-Primitive-Parameterwerte in Konstanten, um die Memoisierung zu erhalten."
+    },
+    "rerender-derived-state": {
+      "description": "Abonnieren Sie abgeleiteten Boolean-State statt kontinuierlicher Werte, um die Re-render-Häufigkeit zu reduzieren."
+    },
+    "rerender-defer-reads": {
+      "description": "Abonnieren Sie keinen dynamischen State (searchParams, localStorage), wenn Sie ihn nur in Callbacks lesen."
+    },
+    "rerender-transitions": {
+      "description": "Markieren Sie häufige, nicht dringende State-Updates als Transitions, um die UI-Reaktionsfähigkeit zu erhalten."
+    },
+    "rerender-dependencies": {
+      "description": "Geben Sie primitive Abhängigkeiten statt Objekte an, um Effect-Neuausführungen zu minimieren."
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "Wenn ein Ausdruck einfach ist und einen primitiven Ergebnistyp hat, wrappen Sie ihn nicht in useMemo."
+    },
+    "rendering-content-visibility": {
+      "description": "Wenden Sie content-visibility: auto an, um das Rendering außerhalb des Bildschirms zu verzögern."
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "Injizieren Sie ein synchrones Skript, das das DOM vor der React-Hydration aktualisiert, um Flackern zu vermeiden."
+    },
+    "rendering-activity": {
+      "description": "Verwenden Sie Reacts Activity-Komponente, um State/DOM für teure Komponenten zu erhalten, die häufig die Sichtbarkeit wechseln."
+    },
+    "rendering-hoist-jsx": {
+      "description": "Extrahieren Sie statisches JSX außerhalb von Komponenten, um Neuerstellung zu vermeiden."
+    },
+    "rendering-conditional-render": {
+      "description": "Verwenden Sie explizite Ternäroperatoren statt && für bedingtes Rendering, wenn die Bedingung 0 oder NaN sein kann."
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "Wrappen Sie SVG in ein div und animieren Sie den Wrapper für Hardware-Beschleunigung."
+    },
+    "rendering-svg-precision": {
+      "description": "Reduzieren Sie die SVG-Koordinatenpräzision, um die Dateigröße zu verringern."
+    },
+    "js-length-check-first": {
+      "description": "Wenn Sie Arrays mit teuren Operationen vergleichen, prüfen Sie zuerst die Längen."
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort() mutiert das Array in-place. Verwenden Sie .toSorted(), um ein neues sortiertes Array ohne Mutation zu erstellen."
+    },
+    "js-batch-dom-css": {
+      "description": "Vermeiden Sie das Verschachteln von Style-Schreibvorgängen mit Layout-Lesevorgängen, um erzwungene synchrone Layouts zu verhindern."
+    },
+    "js-cache-function-results": {
+      "description": "Verwenden Sie eine modulweite Map, um Funktionsergebnisse zu cachen, wenn dieselbe Funktion wiederholt aufgerufen wird."
+    },
+    "js-index-maps": {
+      "description": "Mehrere .find()-Aufrufe mit demselben Key sollten eine Map für O(1)-Lookups verwenden."
+    },
+    "js-set-map-lookups": {
+      "description": "Konvertieren Sie Arrays zu Set/Map für wiederholte Mitgliedschaftsprüfungen."
+    },
+    "js-combine-iterations": {
+      "description": "Mehrere .filter()- oder .map()-Aufrufe iterieren das Array mehrmals. Kombinieren Sie sie in einer Schleife."
+    },
+    "js-early-exit": {
+      "description": "Kehren Sie früh zurück, wenn das Ergebnis feststeht, um unnötige Verarbeitung zu überspringen."
+    },
+    "js-hoist-regexp": {
+      "description": "Erstellen Sie keine RegExp innerhalb von render. Heben Sie sie in den Modulbereich oder memoisieren Sie mit useMemo()."
+    },
+    "js-cache-property-access": {
+      "description": "Cachen Sie Objekt-Property-Lookups in Hot Paths."
+    },
+    "js-cache-storage": {
+      "description": "localStorage, sessionStorage und document.cookie sind synchron und teuer. Cachen Sie Lesevorgänge im Speicher."
+    },
+    "js-min-max-loop": {
+      "description": "Das Finden des kleinsten oder größten Elements erfordert nur einen einzigen Durchlauf durch das Array. Sortieren ist Verschwendung."
+    },
+    "advanced-event-handler-refs": {
+      "description": "Speichern Sie Callbacks in Refs, wenn sie in Effects verwendet werden, die bei Callback-Änderungen nicht neu abonnieren sollen."
+    },
+    "advanced-use-latest": {
+      "description": "Greifen Sie mit useEffectEvent auf aktuelle Werte in Callbacks zu, ohne sie zu Dependency-Arrays hinzuzufügen."
+    }
+  }
+}

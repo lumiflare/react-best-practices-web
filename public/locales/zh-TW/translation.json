@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "優化React應用程式效能的52條規則",
+    "description": "React效能優化模式和最佳實踐的綜合指南"
+  },
+  "nav": {
+    "home": "首頁",
+    "toggleSidebar": "切換側邊欄",
+    "toggleTheme": "切換主題",
+    "selectLanguage": "選擇語言",
+    "viewSource": "檢視原始碼"
+  },
+  "theme": {
+    "light": "淺色",
+    "dark": "深色",
+    "system": "系統"
+  },
+  "code": {
+    "incorrect": "錯誤範例",
+    "correct": "正確範例",
+    "copy": "複製程式碼",
+    "copied": "已複製！"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Waterfall是效能下降的頭號殺手。每個順序await都會累積完整的網路延遲。消除它們可以獲得最大的效能提升。"
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "減少初始bundle大小可以改善Time to Interactive和Largest Contentful Paint。"
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "優化伺服器端渲染和資料獲取，消除伺服器端waterfall並減少回應時間。"
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "自動deduplication和高效的資料獲取模式減少冗餘網路請求。"
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "減少不必要的re-render，最小化浪費的計算並提高UI回應性。"
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "優化渲染過程，減少瀏覽器需要做的工作。"
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "熱點路徑的micro-optimization可以累積成有意義的改進。"
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "需要謹慎實現的特殊情況的高級模式。"
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "當async操作沒有相互依賴時，使用Promise.all()並行執行。"
+    },
+    "async-dependencies": {
+      "description": "對於具有部分依賴的操作，使用better-all來最大化並行性。"
+    },
+    "async-api-routes": {
+      "description": "在API routes和Server Actions中，即使還不await，也要立即啟動獨立操作。"
+    },
+    "async-suspense-boundaries": {
+      "description": "使用Suspense boundary在資料載入時更快地顯示wrapper UI。"
+    },
+    "async-defer-await": {
+      "description": "將await操作移到實際使用它們的分支中，以避免阻塞不需要它們的程式碼路徑。"
+    },
+    "bundle-barrel-imports": {
+      "description": "直接從原始檔案import，而不是barrel檔案，以避免載入數千個未使用的模組。"
+    },
+    "bundle-dynamic-imports": {
+      "description": "使用next/dynamic延遲載入初始渲染不需要的大型元件。"
+    },
+    "bundle-conditional": {
+      "description": "僅在功能啟用時載入大型資料或模組。"
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics、logging和error tracking不會阻塞使用者互動。在hydration後載入它們。"
+    },
+    "bundle-preload": {
+      "description": "在需要之前預載重型bundle以減少感知延遲。"
+    },
+    "server-auth-actions": {
+      "description": "Server Actions作為公開endpoint暴露。始終在每個Server Action內驗證身份驗證和授權。"
+    },
+    "server-parallel-fetching": {
+      "description": "React Server Components在樹中順序執行。透過組合重構來並行化資料獲取。"
+    },
+    "server-serialization": {
+      "description": "React Server/Client邊界序列化所有物件屬性。只傳遞客戶端實際使用的欄位。"
+    },
+    "server-cache-lru": {
+      "description": "React.cache()只在一個請求內工作。對於跨順序請求共享的資料，使用LRU cache。"
+    },
+    "server-cache-react": {
+      "description": "使用React.cache()進行伺服器端請求deduplication。身份驗證和資料庫查詢受益最大。"
+    },
+    "server-after-nonblocking": {
+      "description": "使用Next.js的after()來安排在發送回應後應該執行的工作。"
+    },
+    "server-dedup-props": {
+      "description": "RSC→client序列化按物件參考而非值進行deduplication。在客戶端而非伺服器端進行轉換。"
+    },
+    "client-swr-dedup": {
+      "description": "SWR支援跨元件實例的請求deduplication、caching和revalidation。"
+    },
+    "client-localstorage-schema": {
+      "description": "為key添加版本前綴，只儲存需要的欄位。防止schema衝突和敏感資料的意外儲存。"
+    },
+    "client-passive-event-listeners": {
+      "description": "為touch和wheel event listener添加{ passive: true }以啟用即時捲動。"
+    },
+    "client-event-listeners": {
+      "description": "使用useSWRSubscription()在元件實例之間共享全域event listener。"
+    },
+    "rerender-functional-setstate": {
+      "description": "當基於當前state值更新state時，使用setState的函數式更新形式。"
+    },
+    "rerender-lazy-state-init": {
+      "description": "對於昂貴的初始值，向useState傳遞函數。沒有函數形式，initializer會在每次render時執行。"
+    },
+    "rerender-memo": {
+      "description": "將昂貴的工作提取到memoized元件中，以在計算前啟用early return。"
+    },
+    "rerender-memo-with-default-value": {
+      "description": "將預設的non-primitive參數值提取為常數以保持memoization。"
+    },
+    "rerender-derived-state": {
+      "description": "訂閱派生的boolean state而非連續值，以減少re-render頻率。"
+    },
+    "rerender-defer-reads": {
+      "description": "如果只在callback內讀取，不要訂閱動態state（searchParams、localStorage）。"
+    },
+    "rerender-transitions": {
+      "description": "將頻繁的、非緊急的state更新標記為transition以保持UI回應性。"
+    },
+    "rerender-dependencies": {
+      "description": "指定primitive依賴而非物件，以最小化effect重新執行。"
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "當表達式簡單且具有primitive結果類型時，不要用useMemo包裝。"
+    },
+    "rendering-content-visibility": {
+      "description": "套用content-visibility: auto來延遲螢幕外渲染。"
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "注入同步腳本在React hydration前更新DOM以避免閃爍。"
+    },
+    "rendering-activity": {
+      "description": "使用React的Activity元件為頻繁切換可見性的昂貴元件保留state/DOM。"
+    },
+    "rendering-hoist-jsx": {
+      "description": "將靜態JSX提取到元件外以避免重新建立。"
+    },
+    "rendering-conditional-render": {
+      "description": "當條件可能為0或NaN時，使用明確三元運算子而非&&進行條件渲染。"
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "將SVG包裝在div中，並為硬體加速動畫化wrapper。"
+    },
+    "rendering-svg-precision": {
+      "description": "降低SVG座標精度以減小檔案大小。"
+    },
+    "js-length-check-first": {
+      "description": "用昂貴操作比較陣列時，先檢查長度。"
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort()會就地修改陣列。使用.toSorted()建立新的排序陣列而不修改原陣列。"
+    },
+    "js-batch-dom-css": {
+      "description": "避免交錯樣式寫入和佈局讀取，以防止強制同步佈局。"
+    },
+    "js-cache-function-results": {
+      "description": "當同一函數被重複呼叫時，使用模組級Map快取函數結果。"
+    },
+    "js-index-maps": {
+      "description": "使用相同key多次呼叫.find()時應使用Map進行O(1)查找。"
+    },
+    "js-set-map-lookups": {
+      "description": "將陣列轉換為Set/Map以進行重複的成員資格檢查。"
+    },
+    "js-combine-iterations": {
+      "description": "多次.filter()或.map()呼叫會多次迭代陣列。合併為一個迴圈。"
+    },
+    "js-early-exit": {
+      "description": "當結果確定時儘早返回，以跳過不必要的處理。"
+    },
+    "js-hoist-regexp": {
+      "description": "不要在render內建立RegExp。提升到模組作用域或用useMemo()記憶化。"
+    },
+    "js-cache-property-access": {
+      "description": "在熱點路徑中快取物件屬性查找。"
+    },
+    "js-cache-storage": {
+      "description": "localStorage、sessionStorage和document.cookie是同步且昂貴的。在記憶體中快取讀取。"
+    },
+    "js-min-max-loop": {
+      "description": "找到最小或最大元素只需要一次遍歷陣列。排序是浪費的。"
+    },
+    "advanced-event-handler-refs": {
+      "description": "當callback用於不應在callback變化時重新訂閱的effect中時，將callback儲存在ref中。"
+    },
+    "advanced-use-latest": {
+      "description": "使用useEffectEvent在callback中存取最新值，而無需將它們添加到依賴陣列。"
+    }
+  }
+}

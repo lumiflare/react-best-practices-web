@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "React 애플리케이션 성능 최적화를 위한 52가지 규칙",
+    "description": "React 성능 최적화 패턴과 모범 사례에 대한 종합 가이드"
+  },
+  "nav": {
+    "home": "홈",
+    "toggleSidebar": "사이드바 토글",
+    "toggleTheme": "테마 변경",
+    "selectLanguage": "언어 선택",
+    "viewSource": "소스 보기"
+  },
+  "theme": {
+    "light": "라이트",
+    "dark": "다크",
+    "system": "시스템"
+  },
+  "code": {
+    "incorrect": "잘못된 예시",
+    "correct": "올바른 예시",
+    "copy": "코드 복사",
+    "copied": "복사됨!"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Waterfall은 성능 저하의 가장 큰 원인입니다. 순차적 await는 네트워크 지연을 누적시킵니다. 이를 제거하면 가장 큰 성능 향상을 얻을 수 있습니다."
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "초기 bundle 크기를 줄이면 Time to Interactive와 Largest Contentful Paint가 개선됩니다."
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "서버 사이드 렌더링과 데이터 fetching을 최적화하여 서버 측 waterfall을 제거하고 응답 시간을 줄입니다."
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "자동 deduplication과 효율적인 데이터 fetching 패턴으로 중복 네트워크 요청을 줄입니다."
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "불필요한 re-render를 줄여 낭비되는 연산을 최소화하고 UI 반응성을 높입니다."
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "렌더링 과정을 최적화하여 브라우저가 해야 할 작업을 줄입니다."
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "Hot path에서의 micro-optimization이 모여 의미 있는 개선을 만들어냅니다."
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "신중한 구현이 필요한 특수한 상황을 위한 고급 패턴입니다."
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "async 작업에 상호의존성이 없으면 Promise.all()로 동시에 실행하세요."
+    },
+    "async-dependencies": {
+      "description": "부분적 의존성이 있는 작업은 better-all을 사용해 병렬성을 극대화하세요."
+    },
+    "async-api-routes": {
+      "description": "API routes와 Server Actions에서 독립적인 작업은 await하지 않더라도 즉시 시작하세요."
+    },
+    "async-suspense-boundaries": {
+      "description": "Suspense boundary를 사용해 데이터 로딩 중에도 wrapper UI를 먼저 보여주세요."
+    },
+    "async-defer-await": {
+      "description": "await 연산을 실제로 사용하는 분기 안으로 이동하여 불필요한 코드 경로 차단을 방지하세요."
+    },
+    "bundle-barrel-imports": {
+      "description": "barrel 파일 대신 소스 파일에서 직접 import하여 수천 개의 미사용 모듈 로딩을 방지하세요."
+    },
+    "bundle-dynamic-imports": {
+      "description": "next/dynamic을 사용해 초기 렌더링에 필요 없는 큰 컴포넌트를 지연 로딩하세요."
+    },
+    "bundle-conditional": {
+      "description": "기능이 활성화될 때만 큰 데이터나 모듈을 로드하세요."
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics, logging, error tracking은 사용자 상호작용을 차단하지 않습니다. hydration 후에 로드하세요."
+    },
+    "bundle-preload": {
+      "description": "무거운 bundle을 필요하기 전에 미리 로드하여 체감 지연 시간을 줄이세요."
+    },
+    "server-auth-actions": {
+      "description": "Server Actions은 공개 endpoint로 노출됩니다. 각 Server Action 내에서 항상 인증과 권한을 확인하세요."
+    },
+    "server-parallel-fetching": {
+      "description": "React Server Components는 트리 내에서 순차적으로 실행됩니다. 컴포넌트 구성을 재구조화하여 데이터 fetching을 병렬화하세요."
+    },
+    "server-serialization": {
+      "description": "React Server/Client 경계는 모든 객체 속성을 직렬화합니다. 클라이언트가 실제로 사용하는 필드만 전달하세요."
+    },
+    "server-cache-lru": {
+      "description": "React.cache()는 하나의 요청 내에서만 동작합니다. 순차적 요청 간 공유 데이터에는 LRU cache를 사용하세요."
+    },
+    "server-cache-react": {
+      "description": "서버 사이드 요청 중복 제거에 React.cache()를 사용하세요. 인증과 데이터베이스 쿼리에 가장 효과적입니다."
+    },
+    "server-after-nonblocking": {
+      "description": "Next.js의 after()를 사용해 응답 전송 후 실행되어야 할 작업을 예약하세요."
+    },
+    "server-dedup-props": {
+      "description": "RSC→client 직렬화는 값이 아닌 객체 참조로 중복을 제거합니다. 변환은 서버가 아닌 클라이언트에서 하세요."
+    },
+    "client-swr-dedup": {
+      "description": "SWR은 컴포넌트 인스턴스 간 요청 deduplication, caching, revalidation을 지원합니다."
+    },
+    "client-localstorage-schema": {
+      "description": "key에 버전 접두사를 추가하고 필요한 필드만 저장하세요. 스키마 충돌과 민감한 데이터의 우발적 저장을 방지합니다."
+    },
+    "client-passive-event-listeners": {
+      "description": "touch와 wheel event listener에 { passive: true }를 추가하여 즉각적인 스크롤을 활성화하세요."
+    },
+    "client-event-listeners": {
+      "description": "useSWRSubscription()을 사용해 컴포넌트 인스턴스 간 글로벌 event listener를 공유하세요."
+    },
+    "rerender-functional-setstate": {
+      "description": "현재 state 값을 기반으로 state를 업데이트할 때는 setState의 함수형 업데이트를 사용하세요."
+    },
+    "rerender-lazy-state-init": {
+      "description": "비용이 많이 드는 초기값에는 useState에 함수를 전달하세요. 함수 형태가 아니면 initializer가 매 렌더마다 실행됩니다."
+    },
+    "rerender-memo": {
+      "description": "비용이 큰 작업을 memoized 컴포넌트로 추출하여 연산 전에 early return을 가능하게 하세요."
+    },
+    "rerender-memo-with-default-value": {
+      "description": "기본 non-primitive 매개변수 값을 상수로 추출하여 memoization을 유지하세요."
+    },
+    "rerender-derived-state": {
+      "description": "연속적인 값 대신 파생된 boolean state를 구독하여 re-render 빈도를 줄이세요."
+    },
+    "rerender-defer-reads": {
+      "description": "callback 내에서만 읽는다면 동적 state(searchParams, localStorage)를 구독하지 마세요."
+    },
+    "rerender-transitions": {
+      "description": "빈번하고 긴급하지 않은 state 업데이트를 transition으로 표시하여 UI 반응성을 유지하세요."
+    },
+    "rerender-dependencies": {
+      "description": "객체 대신 primitive 의존성을 지정하여 effect 재실행을 최소화하세요."
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "표현식이 간단하고 primitive 결과 타입을 가지면 useMemo로 감싸지 마세요."
+    },
+    "rendering-content-visibility": {
+      "description": "content-visibility: auto를 적용하여 화면 밖 렌더링을 지연시키세요."
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "React hydration 전에 DOM을 업데이트하는 동기 스크립트를 주입하여 깜빡임을 방지하세요."
+    },
+    "rendering-activity": {
+      "description": "React의 Activity 컴포넌트를 사용해 가시성이 자주 전환되는 비용이 큰 컴포넌트의 state/DOM을 보존하세요."
+    },
+    "rendering-hoist-jsx": {
+      "description": "정적 JSX를 컴포넌트 외부로 추출하여 재생성을 방지하세요."
+    },
+    "rendering-conditional-render": {
+      "description": "조건이 0이나 NaN일 수 있을 때 조건부 렌더링에 && 대신 명시적 삼항 연산자를 사용하세요."
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "SVG를 div로 감싸고 하드웨어 가속을 위해 wrapper를 애니메이션하세요."
+    },
+    "rendering-svg-precision": {
+      "description": "SVG 좌표 정밀도를 줄여 파일 크기를 감소시키세요."
+    },
+    "js-length-check-first": {
+      "description": "비용이 큰 연산으로 배열을 비교할 때 먼저 길이를 확인하세요."
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort()는 배열을 제자리에서 변경합니다. .toSorted()를 사용해 변경 없이 새 정렬된 배열을 만드세요."
+    },
+    "js-batch-dom-css": {
+      "description": "강제 동기 레이아웃을 방지하기 위해 스타일 쓰기와 레이아웃 읽기를 번갈아 하지 마세요."
+    },
+    "js-cache-function-results": {
+      "description": "같은 함수가 반복 호출될 때 모듈 레벨 Map을 사용해 함수 결과를 캐시하세요."
+    },
+    "js-index-maps": {
+      "description": "같은 key로 여러 번 .find()를 호출하면 O(1) 조회를 위해 Map을 사용하세요."
+    },
+    "js-set-map-lookups": {
+      "description": "반복적인 멤버십 검사를 위해 배열을 Set/Map으로 변환하세요."
+    },
+    "js-combine-iterations": {
+      "description": "여러 .filter()나 .map() 호출은 배열을 여러 번 순회합니다. 하나의 루프로 결합하세요."
+    },
+    "js-early-exit": {
+      "description": "결과가 결정되면 일찍 반환하여 불필요한 처리를 건너뛰세요."
+    },
+    "js-hoist-regexp": {
+      "description": "render 내에서 RegExp를 생성하지 마세요. 모듈 스코프로 호이스팅하거나 useMemo()로 메모이즈하세요."
+    },
+    "js-cache-property-access": {
+      "description": "hot path에서 객체 속성 조회를 캐시하세요."
+    },
+    "js-cache-storage": {
+      "description": "localStorage, sessionStorage, document.cookie는 동기적이고 비용이 큽니다. 메모리에 읽기를 캐시하세요."
+    },
+    "js-min-max-loop": {
+      "description": "가장 작거나 큰 요소를 찾는 것은 배열을 한 번만 순회하면 됩니다. 정렬은 낭비입니다."
+    },
+    "advanced-event-handler-refs": {
+      "description": "callback 변경 시 재구독하지 않아야 하는 effect에서 사용되는 callback은 ref에 저장하세요."
+    },
+    "advanced-use-latest": {
+      "description": "useEffectEvent를 사용해 의존성 배열에 추가하지 않고 callback에서 최신 값에 접근하세요."
+    }
+  }
+}
