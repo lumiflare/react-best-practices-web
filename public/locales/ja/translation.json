@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "Reactアプリケーションのパフォーマンス最適化のための52のルール",
+    "description": "Reactパフォーマンス最適化パターンとベストプラクティスの総合ガイド"
+  },
+  "nav": {
+    "home": "ホーム",
+    "toggleSidebar": "サイドバー切り替え",
+    "toggleTheme": "テーマ切り替え",
+    "selectLanguage": "言語選択",
+    "viewSource": "ソースを見る"
+  },
+  "theme": {
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム"
+  },
+  "code": {
+    "incorrect": "誤った例",
+    "correct": "正しい例",
+    "copy": "コードをコピー",
+    "copied": "コピーしました！"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Waterfallはパフォーマンス低下の最大の原因です。順次awaitはネットワーク遅延を累積させます。これを排除することで最大の改善が得られます。"
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "初期bundleサイズを削減すると、Time to InteractiveとLargest Contentful Paintが改善されます。"
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "サーバーサイドレンダリングとデータfetchingを最適化し、サーバー側のwaterfallを排除してレスポンス時間を短縮します。"
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "自動deduplicationと効率的なデータfetchingパターンで冗長なネットワークリクエストを削減します。"
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "不要なre-renderを削減し、無駄な計算を最小化してUIの応答性を向上させます。"
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "レンダリングプロセスを最適化し、ブラウザが行う作業を削減します。"
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "ホットパスでのmicro-optimizationが積み重なって意味のある改善になります。"
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "慎重な実装が必要な特殊なケースのための高度なパターンです。"
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "async操作に相互依存性がない場合、Promise.all()で同時に実行してください。"
+    },
+    "async-dependencies": {
+      "description": "部分的な依存関係がある操作には、better-allを使用して並列性を最大化してください。"
+    },
+    "async-api-routes": {
+      "description": "API routesとServer Actionsで、独立した操作はawaitしなくてもすぐに開始してください。"
+    },
+    "async-suspense-boundaries": {
+      "description": "Suspense boundaryを使用して、データロード中でもwrapper UIを先に表示してください。"
+    },
+    "async-defer-await": {
+      "description": "await操作を実際に使用するブランチ内に移動し、不要なコードパスのブロックを防いでください。"
+    },
+    "bundle-barrel-imports": {
+      "description": "barrelファイルではなくソースファイルから直接importして、数千の未使用モジュールのロードを防いでください。"
+    },
+    "bundle-dynamic-imports": {
+      "description": "next/dynamicを使用して、初期レンダリングに不要な大きなコンポーネントを遅延ロードしてください。"
+    },
+    "bundle-conditional": {
+      "description": "機能がアクティブになったときのみ、大きなデータやモジュールをロードしてください。"
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics、logging、error trackingはユーザーインタラクションをブロックしません。hydration後にロードしてください。"
+    },
+    "bundle-preload": {
+      "description": "重いbundleを必要になる前にプリロードして、体感遅延を削減してください。"
+    },
+    "server-auth-actions": {
+      "description": "Server Actionsは公開エンドポイントとして公開されます。各Server Action内で常に認証と認可を確認してください。"
+    },
+    "server-parallel-fetching": {
+      "description": "React Server Componentsはツリー内で順次実行されます。コンポジションを再構成してデータfetchingを並列化してください。"
+    },
+    "server-serialization": {
+      "description": "React Server/Client境界はすべてのオブジェクトプロパティをシリアライズします。クライアントが実際に使用するフィールドのみを渡してください。"
+    },
+    "server-cache-lru": {
+      "description": "React.cache()は1つのリクエスト内でのみ動作します。連続するリクエスト間で共有されるデータにはLRU cacheを使用してください。"
+    },
+    "server-cache-react": {
+      "description": "サーバーサイドリクエストの重複排除にReact.cache()を使用してください。認証とデータベースクエリに最も効果的です。"
+    },
+    "server-after-nonblocking": {
+      "description": "Next.jsのafter()を使用して、レスポンス送信後に実行すべき作業をスケジュールしてください。"
+    },
+    "server-dedup-props": {
+      "description": "RSC→clientシリアライゼーションは値ではなくオブジェクト参照で重複を排除します。変換はサーバーではなくクライアントで行ってください。"
+    },
+    "client-swr-dedup": {
+      "description": "SWRはコンポーネントインスタンス間でリクエストのdeduplication、caching、revalidationを提供します。"
+    },
+    "client-localstorage-schema": {
+      "description": "keyにバージョンプレフィックスを追加し、必要なフィールドのみを保存してください。スキーマの競合と機密データの誤った保存を防ぎます。"
+    },
+    "client-passive-event-listeners": {
+      "description": "touchとwheel event listenerに{ passive: true }を追加して、即座のスクロールを有効にしてください。"
+    },
+    "client-event-listeners": {
+      "description": "useSWRSubscription()を使用して、コンポーネントインスタンス間でグローバルevent listenerを共有してください。"
+    },
+    "rerender-functional-setstate": {
+      "description": "現在のstate値に基づいてstateを更新する場合は、setStateの関数型更新を使用してください。"
+    },
+    "rerender-lazy-state-init": {
+      "description": "コストの高い初期値にはuseStateに関数を渡してください。関数形式でないと、initializerが毎回のレンダーで実行されます。"
+    },
+    "rerender-memo": {
+      "description": "コストの高い作業をmemoizedコンポーネントに抽出して、計算前のearly returnを可能にしてください。"
+    },
+    "rerender-memo-with-default-value": {
+      "description": "デフォルトのnon-primitiveパラメータ値を定数に抽出して、memoizationを維持してください。"
+    },
+    "rerender-derived-state": {
+      "description": "連続的な値ではなく派生したboolean stateをサブスクライブして、re-render頻度を削減してください。"
+    },
+    "rerender-defer-reads": {
+      "description": "callback内でのみ読み取る場合は、動的state（searchParams、localStorage）をサブスクライブしないでください。"
+    },
+    "rerender-transitions": {
+      "description": "頻繁で緊急でないstate更新をtransitionとしてマークして、UIの応答性を維持してください。"
+    },
+    "rerender-dependencies": {
+      "description": "オブジェクトではなくprimitiveの依存関係を指定して、effect再実行を最小化してください。"
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "式が単純でprimitive結果型を持つ場合、useMemoでラップしないでください。"
+    },
+    "rendering-content-visibility": {
+      "description": "content-visibility: autoを適用して、画面外のレンダリングを遅延させてください。"
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "React hydration前にDOMを更新する同期スクリプトを注入して、ちらつきを防いでください。"
+    },
+    "rendering-activity": {
+      "description": "ReactのActivityコンポーネントを使用して、可視性が頻繁に切り替わるコストの高いコンポーネントのstate/DOMを保持してください。"
+    },
+    "rendering-hoist-jsx": {
+      "description": "静的JSXをコンポーネント外に抽出して、再作成を防いでください。"
+    },
+    "rendering-conditional-render": {
+      "description": "条件が0やNaNになる可能性がある場合、条件付きレンダリングに&&ではなく明示的な三項演算子を使用してください。"
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "SVGをdivでラップし、ハードウェアアクセラレーションのためにwrapperをアニメーションしてください。"
+    },
+    "rendering-svg-precision": {
+      "description": "SVG座標の精度を下げてファイルサイズを削減してください。"
+    },
+    "js-length-check-first": {
+      "description": "コストの高い操作で配列を比較する場合、まず長さを確認してください。"
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort()は配列を直接変更します。.toSorted()を使用して、変更なしで新しいソート済み配列を作成してください。"
+    },
+    "js-batch-dom-css": {
+      "description": "強制同期レイアウトを防ぐため、スタイル書き込みとレイアウト読み取りを交互に行わないでください。"
+    },
+    "js-cache-function-results": {
+      "description": "同じ関数が繰り返し呼び出される場合、モジュールレベルのMapを使用して関数結果をキャッシュしてください。"
+    },
+    "js-index-maps": {
+      "description": "同じkeyで複数回.find()を呼び出す場合、O(1)ルックアップのためにMapを使用してください。"
+    },
+    "js-set-map-lookups": {
+      "description": "繰り返しのメンバーシップチェックのために配列をSet/Mapに変換してください。"
+    },
+    "js-combine-iterations": {
+      "description": "複数の.filter()や.map()呼び出しは配列を複数回イテレートします。1つのループに結合してください。"
+    },
+    "js-early-exit": {
+      "description": "結果が決定したら早期にリターンして、不要な処理をスキップしてください。"
+    },
+    "js-hoist-regexp": {
+      "description": "render内でRegExpを作成しないでください。モジュールスコープにホイストするか、useMemo()でメモ化してください。"
+    },
+    "js-cache-property-access": {
+      "description": "ホットパスでオブジェクトプロパティのルックアップをキャッシュしてください。"
+    },
+    "js-cache-storage": {
+      "description": "localStorage、sessionStorage、document.cookieは同期的でコストが高いです。メモリに読み取りをキャッシュしてください。"
+    },
+    "js-min-max-loop": {
+      "description": "最小または最大の要素を見つけるには配列を1回通過するだけで十分です。ソートは無駄です。"
+    },
+    "advanced-event-handler-refs": {
+      "description": "callback変更時に再サブスクライブすべきでないeffectで使用されるcallbackはrefに保存してください。"
+    },
+    "advanced-use-latest": {
+      "description": "useEffectEventを使用して、依存配列に追加せずにcallbackで最新の値にアクセスしてください。"
+    }
+  }
+}

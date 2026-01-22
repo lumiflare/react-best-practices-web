@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "优化React应用性能的52条规则",
+    "description": "React性能优化模式和最佳实践的综合指南"
+  },
+  "nav": {
+    "home": "首页",
+    "toggleSidebar": "切换侧边栏",
+    "toggleTheme": "切换主题",
+    "selectLanguage": "选择语言",
+    "viewSource": "查看源码"
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "系统"
+  },
+  "code": {
+    "incorrect": "错误示例",
+    "correct": "正确示例",
+    "copy": "复制代码",
+    "copied": "已复制！"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Waterfall是性能下降的头号杀手。每个顺序await都会累积完整的网络延迟。消除它们可以获得最大的性能提升。"
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "减少初始bundle大小可以改善Time to Interactive和Largest Contentful Paint。"
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "优化服务器端渲染和数据获取，消除服务器端waterfall并减少响应时间。"
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "自动deduplication和高效的数据获取模式减少冗余网络请求。"
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "减少不必要的re-render，最小化浪费的计算并提高UI响应性。"
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "优化渲染过程，减少浏览器需要做的工作。"
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "热点路径的micro-optimization可以累积成有意义的改进。"
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "需要谨慎实现的特殊情况的高级模式。"
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "当async操作没有相互依赖时，使用Promise.all()并发执行。"
+    },
+    "async-dependencies": {
+      "description": "对于具有部分依赖的操作，使用better-all来最大化并行性。"
+    },
+    "async-api-routes": {
+      "description": "在API routes和Server Actions中，即使还不await，也要立即启动独立操作。"
+    },
+    "async-suspense-boundaries": {
+      "description": "使用Suspense boundary在数据加载时更快地显示wrapper UI。"
+    },
+    "async-defer-await": {
+      "description": "将await操作移到实际使用它们的分支中，以避免阻塞不需要它们的代码路径。"
+    },
+    "bundle-barrel-imports": {
+      "description": "直接从源文件import，而不是barrel文件，以避免加载数千个未使用的模块。"
+    },
+    "bundle-dynamic-imports": {
+      "description": "使用next/dynamic延迟加载初始渲染不需要的大型组件。"
+    },
+    "bundle-conditional": {
+      "description": "仅在功能激活时加载大型数据或模块。"
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics、logging和error tracking不会阻塞用户交互。在hydration后加载它们。"
+    },
+    "bundle-preload": {
+      "description": "在需要之前预加载重型bundle以减少感知延迟。"
+    },
+    "server-auth-actions": {
+      "description": "Server Actions作为公共endpoint暴露。始终在每个Server Action内验证身份验证和授权。"
+    },
+    "server-parallel-fetching": {
+      "description": "React Server Components在树中顺序执行。通过组合重构来并行化数据获取。"
+    },
+    "server-serialization": {
+      "description": "React Server/Client边界序列化所有对象属性。只传递客户端实际使用的字段。"
+    },
+    "server-cache-lru": {
+      "description": "React.cache()只在一个请求内工作。对于跨顺序请求共享的数据，使用LRU cache。"
+    },
+    "server-cache-react": {
+      "description": "使用React.cache()进行服务器端请求deduplication。身份验证和数据库查询受益最大。"
+    },
+    "server-after-nonblocking": {
+      "description": "使用Next.js的after()来安排在发送响应后应该执行的工作。"
+    },
+    "server-dedup-props": {
+      "description": "RSC→client序列化按对象引用而非值进行deduplication。在客户端而非服务器端进行转换。"
+    },
+    "client-swr-dedup": {
+      "description": "SWR支持跨组件实例的请求deduplication、caching和revalidation。"
+    },
+    "client-localstorage-schema": {
+      "description": "为key添加版本前缀，只存储需要的字段。防止schema冲突和敏感数据的意外存储。"
+    },
+    "client-passive-event-listeners": {
+      "description": "为touch和wheel event listener添加{ passive: true }以启用即时滚动。"
+    },
+    "client-event-listeners": {
+      "description": "使用useSWRSubscription()在组件实例之间共享全局event listener。"
+    },
+    "rerender-functional-setstate": {
+      "description": "当基于当前state值更新state时，使用setState的函数式更新形式。"
+    },
+    "rerender-lazy-state-init": {
+      "description": "对于昂贵的初始值，向useState传递函数。没有函数形式，initializer会在每次render时运行。"
+    },
+    "rerender-memo": {
+      "description": "将昂贵的工作提取到memoized组件中，以在计算前启用early return。"
+    },
+    "rerender-memo-with-default-value": {
+      "description": "将默认的non-primitive参数值提取为常量以保持memoization。"
+    },
+    "rerender-derived-state": {
+      "description": "订阅派生的boolean state而非连续值，以减少re-render频率。"
+    },
+    "rerender-defer-reads": {
+      "description": "如果只在callback内读取，不要订阅动态state（searchParams、localStorage）。"
+    },
+    "rerender-transitions": {
+      "description": "将频繁的、非紧急的state更新标记为transition以保持UI响应性。"
+    },
+    "rerender-dependencies": {
+      "description": "指定primitive依赖而非对象，以最小化effect重新运行。"
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "当表达式简单且具有primitive结果类型时，不要用useMemo包装。"
+    },
+    "rendering-content-visibility": {
+      "description": "应用content-visibility: auto来延迟屏幕外渲染。"
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "注入同步脚本在React hydration前更新DOM以避免闪烁。"
+    },
+    "rendering-activity": {
+      "description": "使用React的Activity组件为频繁切换可见性的昂贵组件保留state/DOM。"
+    },
+    "rendering-hoist-jsx": {
+      "description": "将静态JSX提取到组件外以避免重新创建。"
+    },
+    "rendering-conditional-render": {
+      "description": "当条件可能为0或NaN时，使用显式三元运算符而非&&进行条件渲染。"
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "将SVG包装在div中，并为硬件加速动画化wrapper。"
+    },
+    "rendering-svg-precision": {
+      "description": "降低SVG坐标精度以减小文件大小。"
+    },
+    "js-length-check-first": {
+      "description": "用昂贵操作比较数组时，先检查长度。"
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort()会就地修改数组。使用.toSorted()创建新的排序数组而不修改原数组。"
+    },
+    "js-batch-dom-css": {
+      "description": "避免交错样式写入和布局读取，以防止强制同步布局。"
+    },
+    "js-cache-function-results": {
+      "description": "当同一函数被重复调用时，使用模块级Map缓存函数结果。"
+    },
+    "js-index-maps": {
+      "description": "使用相同key多次调用.find()时应使用Map进行O(1)查找。"
+    },
+    "js-set-map-lookups": {
+      "description": "将数组转换为Set/Map以进行重复的成员资格检查。"
+    },
+    "js-combine-iterations": {
+      "description": "多次.filter()或.map()调用会多次迭代数组。合并为一个循环。"
+    },
+    "js-early-exit": {
+      "description": "当结果确定时尽早返回，以跳过不必要的处理。"
+    },
+    "js-hoist-regexp": {
+      "description": "不要在render内创建RegExp。提升到模块作用域或用useMemo()记忆化。"
+    },
+    "js-cache-property-access": {
+      "description": "在热点路径中缓存对象属性查找。"
+    },
+    "js-cache-storage": {
+      "description": "localStorage、sessionStorage和document.cookie是同步且昂贵的。在内存中缓存读取。"
+    },
+    "js-min-max-loop": {
+      "description": "找到最小或最大元素只需要一次遍历数组。排序是浪费的。"
+    },
+    "advanced-event-handler-refs": {
+      "description": "当callback用于不应在callback变化时重新订阅的effect中时，将callback存储在ref中。"
+    },
+    "advanced-use-latest": {
+      "description": "使用useEffectEvent在callback中访问最新值，而无需将它们添加到依赖数组。"
+    }
+  }
+}

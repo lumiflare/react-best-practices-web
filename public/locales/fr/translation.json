@@ -1,0 +1,220 @@
+{
+  "site": {
+    "title": "React Best Practices",
+    "subtitle": "52 règles pour optimiser les performances des applications React",
+    "description": "Un guide complet des modèles d'optimisation des performances React et des meilleures pratiques"
+  },
+  "nav": {
+    "home": "Accueil",
+    "toggleSidebar": "Basculer la barre latérale",
+    "toggleTheme": "Changer de thème",
+    "selectLanguage": "Sélectionner la langue",
+    "viewSource": "Voir le code source"
+  },
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "code": {
+    "incorrect": "Incorrect",
+    "correct": "Correct",
+    "copy": "Copier le code",
+    "copied": "Copié !"
+  },
+  "categories": {
+    "async": {
+      "title": "Eliminating Waterfalls",
+      "description": "Les waterfalls sont le tueur de performances n°1. Chaque await séquentiel ajoute une latence réseau complète. Les éliminer produit les gains les plus importants."
+    },
+    "bundle": {
+      "title": "Bundle Size Optimization",
+      "description": "Réduire la taille initiale du bundle améliore le Time to Interactive et le Largest Contentful Paint."
+    },
+    "server": {
+      "title": "Server-Side Performance",
+      "description": "Optimiser le rendu côté serveur et la récupération des données élimine les waterfalls côté serveur et réduit les temps de réponse."
+    },
+    "client": {
+      "title": "Client-Side Data Fetching",
+      "description": "La déduplication automatique et les modèles efficaces de récupération de données réduisent les requêtes réseau redondantes."
+    },
+    "rerender": {
+      "title": "Re-render Optimization",
+      "description": "Réduire les re-renders inutiles minimise les calculs gaspillés et améliore la réactivité de l'interface."
+    },
+    "rendering": {
+      "title": "Rendering Performance",
+      "description": "Optimiser le processus de rendu réduit le travail que le navigateur doit effectuer."
+    },
+    "js": {
+      "title": "JavaScript Performance",
+      "description": "Les micro-optimisations pour les chemins critiques peuvent s'additionner pour des améliorations significatives."
+    },
+    "advanced": {
+      "title": "Advanced Patterns",
+      "description": "Modèles avancés pour des cas spécifiques nécessitant une implémentation soigneuse."
+    }
+  },
+  "impact": {
+    "CRITICAL": "CRITICAL",
+    "HIGH": "HIGH",
+    "MEDIUM": "MEDIUM",
+    "LOW": "LOW"
+  },
+  "rules": {
+    "async-parallel": {
+      "description": "Lorsque les opérations async n'ont pas d'interdépendances, exécutez-les simultanément avec Promise.all()."
+    },
+    "async-dependencies": {
+      "description": "Pour les opérations avec des dépendances partielles, utilisez better-all pour maximiser le parallélisme."
+    },
+    "async-api-routes": {
+      "description": "Dans les API routes et Server Actions, démarrez les opérations indépendantes immédiatement, même si vous ne les attendez pas encore."
+    },
+    "async-suspense-boundaries": {
+      "description": "Utilisez les Suspense boundaries pour afficher l'UI conteneur plus rapidement pendant le chargement des données."
+    },
+    "async-defer-await": {
+      "description": "Déplacez les opérations await dans les branches où elles sont réellement utilisées pour éviter de bloquer les chemins de code qui n'en ont pas besoin."
+    },
+    "bundle-barrel-imports": {
+      "description": "Importez directement depuis les fichiers sources plutôt que les barrel files pour éviter de charger des milliers de modules inutilisés."
+    },
+    "bundle-dynamic-imports": {
+      "description": "Utilisez next/dynamic pour charger paresseusement les gros composants non nécessaires au rendu initial."
+    },
+    "bundle-conditional": {
+      "description": "Chargez les données ou modules volumineux uniquement lorsqu'une fonctionnalité est activée."
+    },
+    "bundle-defer-third-party": {
+      "description": "Analytics, logging et error tracking ne bloquent pas l'interaction utilisateur. Chargez-les après l'hydration."
+    },
+    "bundle-preload": {
+      "description": "Préchargez les bundles lourds avant qu'ils ne soient nécessaires pour réduire la latence perçue."
+    },
+    "server-auth-actions": {
+      "description": "Les Server Actions sont exposées comme des endpoints publics. Vérifiez toujours l'authentification et l'autorisation dans chaque Server Action."
+    },
+    "server-parallel-fetching": {
+      "description": "Les React Server Components s'exécutent séquentiellement dans un arbre. Restructurez avec la composition pour paralléliser la récupération des données."
+    },
+    "server-serialization": {
+      "description": "La frontière React Server/Client sérialise toutes les propriétés d'objet. Ne passez que les champs que le client utilise réellement."
+    },
+    "server-cache-lru": {
+      "description": "React.cache() ne fonctionne que dans une seule requête. Pour les données partagées entre requêtes séquentielles, utilisez un cache LRU."
+    },
+    "server-cache-react": {
+      "description": "Utilisez React.cache() pour la déduplication des requêtes côté serveur. L'authentification et les requêtes de base de données en bénéficient le plus."
+    },
+    "server-after-nonblocking": {
+      "description": "Utilisez after() de Next.js pour planifier le travail à exécuter après l'envoi d'une réponse."
+    },
+    "server-dedup-props": {
+      "description": "La sérialisation RSC→client déduplique par référence d'objet, pas par valeur. Faites les transformations côté client, pas serveur."
+    },
+    "client-swr-dedup": {
+      "description": "SWR permet la déduplication des requêtes, le caching et la revalidation entre les instances de composants."
+    },
+    "client-localstorage-schema": {
+      "description": "Ajoutez un préfixe de version aux clés et stockez uniquement les champs nécessaires. Prévient les conflits de schéma et le stockage accidentel de données sensibles."
+    },
+    "client-passive-event-listeners": {
+      "description": "Ajoutez { passive: true } aux event listeners touch et wheel pour activer le défilement immédiat."
+    },
+    "client-event-listeners": {
+      "description": "Utilisez useSWRSubscription() pour partager les event listeners globaux entre les instances de composants."
+    },
+    "rerender-functional-setstate": {
+      "description": "Lors de la mise à jour du state basée sur la valeur actuelle, utilisez la forme de mise à jour fonctionnelle de setState."
+    },
+    "rerender-lazy-state-init": {
+      "description": "Passez une fonction à useState pour les valeurs initiales coûteuses. Sans forme fonction, l'initialiseur s'exécute à chaque render."
+    },
+    "rerender-memo": {
+      "description": "Extrayez le travail coûteux dans des composants mémoïsés pour permettre des retours anticipés avant le calcul."
+    },
+    "rerender-memo-with-default-value": {
+      "description": "Extrayez les valeurs de paramètres non primitifs par défaut en constantes pour préserver la mémoïsation."
+    },
+    "rerender-derived-state": {
+      "description": "Abonnez-vous au state booléen dérivé plutôt qu'aux valeurs continues pour réduire la fréquence des re-renders."
+    },
+    "rerender-defer-reads": {
+      "description": "Ne vous abonnez pas au state dynamique (searchParams, localStorage) si vous ne le lisez que dans les callbacks."
+    },
+    "rerender-transitions": {
+      "description": "Marquez les mises à jour de state fréquentes et non urgentes comme transitions pour maintenir la réactivité de l'UI."
+    },
+    "rerender-dependencies": {
+      "description": "Spécifiez des dépendances primitives plutôt que des objets pour minimiser les réexécutions d'effects."
+    },
+    "rerender-simple-expression-in-memo": {
+      "description": "Quand une expression est simple et a un type de résultat primitif, ne l'enveloppez pas dans useMemo."
+    },
+    "rendering-content-visibility": {
+      "description": "Appliquez content-visibility: auto pour différer le rendu hors écran."
+    },
+    "rendering-hydration-no-flicker": {
+      "description": "Injectez un script synchrone qui met à jour le DOM avant l'hydration React pour éviter le scintillement."
+    },
+    "rendering-activity": {
+      "description": "Utilisez le composant Activity de React pour préserver le state/DOM des composants coûteux qui changent fréquemment de visibilité."
+    },
+    "rendering-hoist-jsx": {
+      "description": "Extrayez le JSX statique en dehors des composants pour éviter la recréation."
+    },
+    "rendering-conditional-render": {
+      "description": "Utilisez des opérateurs ternaires explicites plutôt que && pour le rendu conditionnel quand la condition peut être 0 ou NaN."
+    },
+    "rendering-animate-svg-wrapper": {
+      "description": "Enveloppez le SVG dans un div et animez le conteneur pour l'accélération matérielle."
+    },
+    "rendering-svg-precision": {
+      "description": "Réduisez la précision des coordonnées SVG pour diminuer la taille du fichier."
+    },
+    "js-length-check-first": {
+      "description": "Lors de la comparaison de tableaux avec des opérations coûteuses, vérifiez d'abord les longueurs."
+    },
+    "js-tosorted-immutable": {
+      "description": ".sort() mute le tableau sur place. Utilisez .toSorted() pour créer un nouveau tableau trié sans mutation."
+    },
+    "js-batch-dom-css": {
+      "description": "Évitez d'entrelacer les écritures de style avec les lectures de layout pour prévenir les layouts synchrones forcés."
+    },
+    "js-cache-function-results": {
+      "description": "Utilisez une Map au niveau module pour mettre en cache les résultats de fonction quand la même fonction est appelée répétitivement."
+    },
+    "js-index-maps": {
+      "description": "Plusieurs appels .find() avec la même clé devraient utiliser une Map pour des recherches O(1)."
+    },
+    "js-set-map-lookups": {
+      "description": "Convertissez les tableaux en Set/Map pour les vérifications d'appartenance répétées."
+    },
+    "js-combine-iterations": {
+      "description": "Plusieurs appels .filter() ou .map() itèrent le tableau plusieurs fois. Combinez-les en une seule boucle."
+    },
+    "js-early-exit": {
+      "description": "Retournez tôt quand le résultat est déterminé pour sauter le traitement inutile."
+    },
+    "js-hoist-regexp": {
+      "description": "Ne créez pas de RegExp dans render. Hissez au scope module ou mémoïsez avec useMemo()."
+    },
+    "js-cache-property-access": {
+      "description": "Mettez en cache les recherches de propriétés d'objet dans les chemins critiques."
+    },
+    "js-cache-storage": {
+      "description": "localStorage, sessionStorage et document.cookie sont synchrones et coûteux. Mettez les lectures en cache en mémoire."
+    },
+    "js-min-max-loop": {
+      "description": "Trouver le plus petit ou le plus grand élément ne nécessite qu'un seul passage dans le tableau. Le tri est du gaspillage."
+    },
+    "advanced-event-handler-refs": {
+      "description": "Stockez les callbacks dans des refs quand ils sont utilisés dans des effects qui ne devraient pas se réabonner lors des changements de callback."
+    },
+    "advanced-use-latest": {
+      "description": "Accédez aux dernières valeurs dans les callbacks sans les ajouter aux tableaux de dépendances en utilisant useEffectEvent."
+    }
+  }
+}
