@@ -9,3 +9,6 @@ Each category explains key performance and architecture topics, and each rule pa
 - Rule pages with descriptions, code examples, and impact
 - Multi-language support
 - Light/Dark theme support
+
+
+This site is intended to use the custom domain www.study-react.com
