@@ -13,7 +13,7 @@ export const supportedLanguages = [
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-  { code: 'pt', name: 'Português', flag: '🇧🇷' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
 ] as const
 
 export type LanguageCode = (typeof supportedLanguages)[number]['code']
