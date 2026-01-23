@@ -11,4 +11,4 @@ Each category explains key performance and architecture topics, and each rule pa
 - Light/Dark theme support
 
 
-This site is intended to use the domain [study-react](study-react.com)
+This site is intended to use the domain [study-react](https://study-react.com)
